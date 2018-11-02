@@ -61,3 +61,8 @@ body {
   background-color: #f9f9f9;
   margin-bottom: 5px;
 }
+
+.question-option-text {
+  margin-left: 10px;
+  display: inline-block;
+}
