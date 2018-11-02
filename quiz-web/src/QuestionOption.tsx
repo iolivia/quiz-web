@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 
 export interface QuestionOptionProps {
@@ -15,6 +16,8 @@ export default class QuestionOption extends React.Component<QuestionOptionProps,
 
         return (
             <div className="question-option-container">
+                 <FontAwesomeIcon icon={["far", "circle"]} />
+                 <FontAwesomeIcon icon={["far", "check-circle"]} />
                 * {text}
             </div>
         );

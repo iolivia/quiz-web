@@ -1,9 +1,16 @@
 import * as React from 'react';
 import './App.css';
 
+import { initializeFontAwesomeLibrary } from './fontAwesome';
+
 import Question from './Question';
 
 class App extends React.Component {
+
+  public componentWillMount() {
+    initializeFontAwesomeLibrary();
+  }
+
   public render() {
 
     return (
