@@ -1,9 +1,9 @@
 import * as React from 'react';
-import './App.css';
+import './../styles/App.css';
 
-import { initializeFontAwesomeLibrary } from './fontAwesome';
+import { initializeFontAwesomeLibrary } from '../styles/fontAwesome';
 
-import Question from './Question';
+import Question from '../components/Question';
 
 class App extends React.Component {
 
