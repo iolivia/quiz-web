@@ -58,10 +58,15 @@ body {
 
 .question-option-container {
   background-color: #f9f9f9;
+  padding-left: 10px;
   margin-bottom: 5px;
   overflow: hidden;
   position: relative;
   width: 100%;
+}
+
+.question-option-container:hover {
+  background-color: #e8e8e8;
 }
 
 .question-option-text {
@@ -86,4 +91,17 @@ body {
   right: 0;
   top: 0;
   background-color: #ff7775;
+}
+
+.button-container {
+  width: 75px;
+  height: 17px;
+  background-color: #f9f9f9;
+  border: 1px solid #f2efef;
+  padding: 10px;
+  text-align: center;
+}
+
+.button-container:hover {
+  background-color: #e8e8e8;
 }

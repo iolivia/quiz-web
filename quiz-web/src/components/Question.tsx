@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from './Button';
 import QuestionOption, { QuestionOptionProps } from './QuestionOption';
 
 export interface QuestionProps {
@@ -41,10 +42,7 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
                 </div>
 
                 {/* Question submit button */}
-                <button onClick={this.onSubmit}>
-                    submit
-                </button>
-
+                <Button text="submit" onClick={this.onSubmit}/>
             </div>
         );
     }
