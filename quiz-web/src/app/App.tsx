@@ -3,7 +3,7 @@ import './../styles/App.css';
 
 import { initializeFontAwesomeLibrary } from '../styles/fontAwesome';
 
-import Question from '../components/Question';
+import { Quiz } from 'src/components/Quiz';
 
 class App extends React.Component {
 
@@ -14,37 +14,8 @@ class App extends React.Component {
   public render() {
 
     return (
-      <div className="quiz-container">
-
-        {/* testing ground */}
-        { this.buildQuestion() }
-      </div>
+      <Quiz />
     );
-  }
-
-  private buildQuestion = () => {
-    
-    const questionText = "What is the best fruit?";
-    const options = [
-      {
-        isCorrect: true,
-        text: "Apples"
-      },
-      {
-        isCorrect: true,
-        text: "Oranges"
-      },
-      {
-        isCorrect: false,
-        text: "Pears"
-      },
-      {
-        isCorrect: false,
-        text: "Other"
-      }
-    ];
-
-    return <Question text={questionText} options={options}/>;
   }
 }
 
