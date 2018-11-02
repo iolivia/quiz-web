@@ -25,14 +25,14 @@ describe('QuestionOption', () => {
   describe('when not answered', () => {
 
     it('should not be hovered or selected initially', () => {
-      const wrapper = shallow(<QuestionOption {...anyProps} />);
+      const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       
       expect(wrapper.state().isSelected).toEqual(false);
       expect(wrapper.state().isHovered).toEqual(false);
     });
 
     it('should be selected onClick', () => {
-      const wrapper = shallow(<QuestionOption {...anyProps} />);
+      const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       wrapper.simulate("click");
       wrapper.update();
 
@@ -40,7 +40,7 @@ describe('QuestionOption', () => {
     });
 
     it('should be hovered onMouseEnter', () => {
-      const wrapper = shallow(<QuestionOption {...anyProps} />);
+      const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       wrapper.find(".question-option-container").simulate("mouseEnter");
       wrapper.update();
       
@@ -48,7 +48,7 @@ describe('QuestionOption', () => {
     });
 
     it('should not be hovered onMouseLeave', () => {
-      const wrapper = shallow(<QuestionOption {...anyProps} />);
+      const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       wrapper.simulate("mouseLeave");
       wrapper.update();
 
