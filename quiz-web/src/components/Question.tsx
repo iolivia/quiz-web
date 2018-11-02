@@ -62,6 +62,5 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
 
     private onSubmit = () => {
         this.setState({isAnswered: true});
-        console.log("on submit");
     }
 }
