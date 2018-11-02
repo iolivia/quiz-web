@@ -51,8 +51,10 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
 
     private buildOptions(options: QuestionOptionProps[]) {
         const optionElements = [];
-        for (const option of options) {
-            optionElements.push(<QuestionOption {...option} isAnswered={this.state.isAnswered} />);
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const optionElement = <QuestionOption key={i} {...option} isAnswered={this.state.isAnswered} />;
+            optionElements.push(optionElement);
         }
 
         return optionElements;
