@@ -3,7 +3,7 @@ import './../styles/App.css';
 
 import { initializeFontAwesomeLibrary } from '../styles/fontAwesome';
 
-import { Quiz } from 'src/components/Quiz';
+import { Quiz } from './../components/Quiz';
 
 class App extends React.Component {
 

@@ -34,8 +34,6 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
                     </div>
 
                 </div>
-
-                {/* Question submit button */}
             </div>
         );
     }
