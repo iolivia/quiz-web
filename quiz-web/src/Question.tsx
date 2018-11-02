@@ -16,9 +16,18 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
         const { text, options } = this.props;
 
         return (
-            <div>
-                {text}
-                {this.buildOptions(options)}
+            <div className="question-container">
+
+                {/* Question text */}
+                <div className="question-text">
+                    {text}
+                </div>
+
+                {/* Options */}
+                <div className="question-options-container">
+                    {this.buildOptions(options)}
+                </div>
+
             </div>
         );
     }

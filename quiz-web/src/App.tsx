@@ -7,7 +7,7 @@ class App extends React.Component {
   public render() {
 
     return (
-      <div className="App">
+      <div className="quiz-container">
 
         {/* testing ground */}
         { this.buildQuestion() }
