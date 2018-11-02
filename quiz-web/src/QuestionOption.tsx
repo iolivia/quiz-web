@@ -3,9 +3,10 @@ import * as React from 'react';
 
 export interface QuestionOptionProps {
     text: string;
+    isCorrect: boolean;
+    isAnswered?: boolean;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface QuestionOptionState {
     isHovered: boolean;
     isSelected: boolean;
@@ -23,10 +24,14 @@ export default class QuestionOption extends React.Component<QuestionOptionProps,
 
     public render() {
 
-        const { text } = this.props;
+        const { text, isAnswered, isCorrect } = this.props;
         const { isSelected, isHovered } = this.state;
 
         const icon = isSelected || isHovered  ? "check-circle" : "circle";
+        const answerMarker = isCorrect 
+                                ? (isSelected ? "correct" : "incorrect")
+                                : (isSelected ? "incorrect" : "correct");
+        const answerMarkerClass = "question-option-answer-" + answerMarker;
 
         return (
             <div 
@@ -39,19 +44,26 @@ export default class QuestionOption extends React.Component<QuestionOptionProps,
                 <div className="question-option-text">
                     {text}
                 </div>
+                {isAnswered && <div className={answerMarkerClass} />}
             </div>
         );
     }
 
     private onClick = () => {
-        this.setState({ isSelected: !this.state.isSelected, isHovered: false });
+        if (!this.props.isAnswered) {
+            this.setState({ isSelected: !this.state.isSelected, isHovered: false });
+        }
     }
 
     private onMouseEnter = () => {
-        this.setState({ isHovered: true });
+        if (!this.props.isAnswered) {
+            this.setState({ isHovered: true });
+        }
     }
 
     private onMouseLeave = () => {
-        this.setState({ isHovered: false });
+        if (!this.props.isAnswered) {
+            this.setState({ isHovered: false });
+        }
     }
 }

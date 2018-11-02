@@ -27,20 +27,24 @@ class App extends React.Component {
     const questionText = "What is the best fruit?";
     const options = [
       {
+        isCorrect: true,
         text: "Apples"
       },
       {
+        isCorrect: true,
         text: "Oranges"
       },
       {
+        isCorrect: false,
         text: "Pears"
       },
       {
+        isCorrect: false,
         text: "Other"
       }
     ];
 
-    return <Question text={questionText} options={options} />;
+    return <Question text={questionText} options={options}/>;
   }
 }
 

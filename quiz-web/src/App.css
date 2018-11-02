@@ -57,12 +57,33 @@ body {
 }
 
 .question-option-container {
-  padding: 10px;
   background-color: #f9f9f9;
   margin-bottom: 5px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 .question-option-text {
+  padding: 15px;
   margin-left: 10px;
   display: inline-block;
+}
+
+.question-option-answer-correct {
+  height: 100%;
+  width: 2%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #6ad186;
+}
+
+.question-option-answer-incorrect {
+  height: 100%;
+  width: 2%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #ff7775;
 }

@@ -6,11 +6,18 @@ export interface QuestionProps {
     options: QuestionOptionProps[];
 }
 
-// tslint:disable-next-line:no-empty-interface
-export interface QuestionState {}
+export interface QuestionState {
+    isAnswered: boolean;
+}
 
 export default class Question extends React.Component<QuestionProps, QuestionState> {
 
+    public constructor(props: QuestionProps) {
+        super(props);
+        this.state = {
+            isAnswered: false
+        };
+    }
     public render() {
 
         const { text, options } = this.props;
@@ -18,15 +25,25 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
         return (
             <div className="question-container">
 
-                {/* Question text */}
-                <div className="question-text">
-                    {text}
+                {/* Question body */}
+                <div>
+
+                    {/* Question text */}
+                    <div className="question-text">
+                        {text}
+                    </div>
+
+                    {/* Options */}
+                    <div className="question-options-container">
+                        {this.buildOptions(options)}
+                    </div>
+
                 </div>
 
-                {/* Options */}
-                <div className="question-options-container">
-                    {this.buildOptions(options)}
-                </div>
+                {/* Question submit button */}
+                <button onClick={this.onSubmit}>
+                    submit
+                </button>
 
             </div>
         );
@@ -35,9 +52,14 @@ export default class Question extends React.Component<QuestionProps, QuestionSta
     private buildOptions(options: QuestionOptionProps[]) {
         const optionElements = [];
         for (const option of options) {
-            optionElements.push(<QuestionOption {...option} />);
+            optionElements.push(<QuestionOption {...option} isAnswered={this.state.isAnswered} />);
         }
 
         return optionElements;
+    }
+
+    private onSubmit = () => {
+        this.setState({isAnswered: true});
+        console.log("on submit");
     }
 }
