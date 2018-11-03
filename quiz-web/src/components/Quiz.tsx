@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from './Button';
-import Question, { QuestionProps } from './Question';
+import { Question, QuestionProps } from './Question';
 
 export interface QuizProps {
     title: string;
@@ -51,7 +51,7 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
         const questions = [];
         for (let i = 0; i < questionsProps.length; i++) {
             const questionProps = questionsProps[i];
-            questions.push(<Question {...questionProps} key={i} />);
+            questions.push(<Question {...questionProps} key={i} isAnswered={this.state.isAnswered} />);
         }
         return questions;
     }

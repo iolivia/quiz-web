@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
+import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import QuestionOption from '../QuestionOption';
+import { QuestionOption } from '../QuestionOption';
 
 describe('QuestionOption', () => {
 

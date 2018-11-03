@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 
 import React from 'react';
-import Question from '../Question';
-import QuestionOption, { QuestionOptionProps } from '../QuestionOption';
+import { Question } from '../Question';
+import { QuestionOption, QuestionOptionProps } from '../QuestionOption';
 
 const anyProps = {
     isAnswered: false,

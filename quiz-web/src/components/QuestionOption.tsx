@@ -12,7 +12,7 @@ export interface QuestionOptionState {
     isSelected: boolean;
 }
 
-export default class QuestionOption extends React.Component<QuestionOptionProps, QuestionOptionState> {
+export class QuestionOption extends React.Component<QuestionOptionProps, QuestionOptionState> {
 
     constructor(props: QuestionOptionProps) {
         super(props);

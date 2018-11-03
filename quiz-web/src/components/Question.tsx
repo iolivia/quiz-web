@@ -1,5 +1,5 @@
 import * as React from 'react';
-import QuestionOption, { QuestionOptionProps } from './QuestionOption';
+import { QuestionOption, QuestionOptionProps } from './QuestionOption';
 
 export interface QuestionProps {
     isAnswered: boolean;
@@ -11,7 +11,7 @@ export interface QuestionProps {
 export interface QuestionState {
 }
 
-export default class Question extends React.Component<QuestionProps, QuestionState> {
+export class Question extends React.Component<QuestionProps, QuestionState> {
 
     public render() {
 

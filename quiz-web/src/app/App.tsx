@@ -6,7 +6,7 @@ import { initializeFontAwesomeLibrary } from '../styles/fontAwesome';
 import { QuestionProps } from './../components/Question';
 import { Quiz } from './../components/Quiz';
 
-class App extends React.Component {
+export class App extends React.Component {
 
   public componentWillMount() {
     initializeFontAwesomeLibrary();
@@ -54,5 +54,3 @@ class App extends React.Component {
     return questions;
   }
 }
-
-export default App;
