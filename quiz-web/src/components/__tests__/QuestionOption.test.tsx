@@ -4,18 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import QuestionOption from '../QuestionOption';
 
-const anyProps = {
-  isCorrect: true,
-  text: "someText",
-};
-
-const uncheckedIcon = "circle";
-const checkedIcon = "check-circle";
-
-const correctMarkerClassName = ".question-option-answer-correct";
-const incorrectMarkerClassName = ".question-option-answer-incorrect";
-
 describe('QuestionOption', () => {
+
+  const anyProps = {
+    isCorrect: true,
+    text: "someText",
+  };
+  
+  const uncheckedIcon = "circle";
+  const checkedIcon = "check-circle";
+  
+  const correctMarkerClassName = ".question-option-answer-correct";
+  const incorrectMarkerClassName = ".question-option-answer-incorrect";
+
   it('should render', () => {
     const wrapper = shallow(<QuestionOption {...anyProps} />);
 
