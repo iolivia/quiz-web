@@ -3,54 +3,52 @@ import './../styles/App.css';
 
 import { initializeFontAwesomeLibrary } from '../styles/fontAwesome';
 
-import { QuestionProps } from './../components/Question';
-import { Quiz } from './../components/Quiz';
+import { Quiz, QuizProps } from './../components/Quiz';
+import { getQuiz } from './../components/quizProvider';
 
-export class App extends React.Component {
+// tslint:disable-next-line:no-empty-interface
+export interface AppProps {
+}
+
+export interface AppState {
+  quizProps: QuizProps | null;
+}
+
+export class App extends React.Component<AppProps, AppState> {
+
+  private readonly loadingText: string = "Your quiz is loading ...";
+
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {
+      quizProps: null
+    };
+  }
 
   public componentWillMount() {
     initializeFontAwesomeLibrary();
   }
 
-  public render() {
-
-    return (
-      <Quiz title="Quiz title" questions={this.buildQuestions(10)}/>
-    );
+  public componentDidMount() {
+    getQuiz("test-quiz").then((quizProps) => {
+      this.setState({ quizProps });
+    })
   }
 
-  private buildQuestions = (count: number) => {
+  public render() {
 
-    const text = "What is the best fruit?";
-    const options = [
-      {
-        isCorrect: true,
-        text: "Apples",
-      },
-      {
-        isCorrect: true,
-        text: "Oranges"
-      },
-      {
-        isCorrect: false,
-        text: "Pears"
-      },
-      {
-        isCorrect: false,
-        text: "Other"
-      }
-    ];
-    const question: QuestionProps = {
-      isAnswered: false,
-      options,
-      text,
-    };
+    const { quizProps } = this.state;
 
-    const questions = [];
-    for (let i = 0; i < count; i++) {
-      questions.push(question);
-    }
-
-    return questions;
+    return (
+      <div className="container">
+        { 
+          quizProps 
+            ? <Quiz {...quizProps} /> 
+            : <div className="loading-container">
+                {this.loadingText}
+              </div> 
+        }
+      </div>
+    );
   }
 }
