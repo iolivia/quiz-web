@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Button } from './Button';
-import Question from './Question';
+import Question, { QuestionProps } from './Question';
 
-// tslint:disable-next-line:no-empty-interface
 export interface QuizProps {
+    title: string;
+    questions: QuestionProps[];
 }
 
 export interface QuizState {
@@ -20,18 +21,21 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
     }
 
     public render() {
+
+        const { title, questions } = this.props;
+
         return (
             <div className="quiz-container">
 
                 {/* Header */}
                 <div className="quiz-header">
-                    <h2>Quiz title</h2>
+                    <h2>{title}</h2>
                 </div>
 
                 <div className="quiz-container-inner">
                     {/* Question */}
                     <div className="quiz-questions">
-                        {this.buildQuestions(10)}
+                        {this.buildQuestions(questions)}
                     </div>
 
                     {/* Submit button */}
@@ -43,47 +47,16 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
         );
     }
 
-    private buildQuestions = (count: number) => {
+    private buildQuestions = (questionsProps: QuestionProps[]) => {
         const questions = [];
-        for(let i = 0; i < count; i++) {
-            questions.push(this.buildQuestion(i));
+        for (let i = 0; i < questionsProps.length; i++) {
+            const questionProps = questionsProps[i];
+            questions.push(<Question {...questionProps} key={i} />);
         }
         return questions;
     }
 
-    private buildQuestion = (key: number) => {
-    
-        const questionText = "What is the best fruit?";
-        const options = [
-          {
-            isCorrect: true,
-            text: "Apples"
-          },
-          {
-            isCorrect: true,
-            text: "Oranges"
-          },
-          {
-            isCorrect: false,
-            text: "Pears"
-          },
-          {
-            isCorrect: false,
-            text: "Other"
-          }
-        ];
-    
-        return ( 
-            <Question 
-                key={key}
-                text={questionText} 
-                options={options} 
-                isAnswered={this.state.isAnswered}
-            /> 
-        );
-      }
-    
-      private onSubmit = () => {
-        this.setState({isAnswered: true});
+    private onSubmit = () => {
+        this.setState({ isAnswered: true });
     }
 }
