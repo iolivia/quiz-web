@@ -40,6 +40,15 @@ describe('QuestionOption', () => {
       expect(wrapper.state().isSelected).toEqual(true);
     });
 
+    it('should be not hovered onClick', () => {
+      const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
+      wrapper.setState({ isHovered: true });
+      wrapper.simulate("click");
+      wrapper.update();
+
+      expect(wrapper.state().isHovered).toEqual(false);
+    });
+
     it('should be hovered onMouseEnter', () => {
       const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       wrapper.find(".question-option-container").simulate("mouseEnter");

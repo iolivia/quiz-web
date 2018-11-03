@@ -51,7 +51,7 @@ export default class QuestionOption extends React.Component<QuestionOptionProps,
 
     private onClick = () => {
         if (!this.props.isAnswered) {
-            this.setState({ isSelected: !this.state.isSelected, isHovered: false });
+            this.setState({ isSelected: !this.state.isSelected, isHovered: false }); 
         }
     }
 
