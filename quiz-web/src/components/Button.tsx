@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-// tslint:disable-next-line:no-empty-interface
 export interface ButtonProps {
     onClick: () => void;
     text: string;
