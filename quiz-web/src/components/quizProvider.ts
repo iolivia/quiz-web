@@ -1,4 +1,5 @@
 import { QuestionProps } from './Question';
+import { QuestionOptionProps } from './QuestionOption';
 import { QuizProps } from "./Quiz";
 
 export const getQuiz = (quizId: string): Promise<QuizProps | null> => {
@@ -18,9 +19,7 @@ const getTestQuiz = (): Promise<QuizProps> => {
     });
 }
 
-const buildQuestions = (count: number) => {
-
-    const text = "What is the best fruit?";
+const buildOptionProps = () : QuestionOptionProps[] => {
     const options = [
         {
             isCorrect: true,
@@ -39,14 +38,32 @@ const buildQuestions = (count: number) => {
             text: "Other"
         }
     ];
-    const question: QuestionProps = {
-        isAnswered: false,
-        options,
-        text,
-    };
+
+    const optionsProps = [];
+    for (const option of options) {
+        const optionProps = {
+            ...option,
+            isSelected: false,
+            // tslint:disable-next-line:no-empty
+            onToggleSelected: () => { }
+        };
+        optionsProps.push(optionProps);
+    }
+
+    return optionsProps;
+}
+
+const buildQuestions = (count: number) => {
+
+    const text = "What is the best fruit?";
 
     const questions = [];
     for (let i = 0; i < count; i++) {
+        const question: QuestionProps = {
+            isAnswered: false,
+            options: buildOptionProps(),
+            text,
+        };
         questions.push(question);
     }
 

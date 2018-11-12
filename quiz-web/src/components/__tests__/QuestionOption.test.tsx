@@ -8,6 +8,8 @@ describe('QuestionOption', () => {
 
   const anyProps = {
     isCorrect: true,
+    isSelected: false,
+    onToggleSelected: jest.fn(),
     text: "someText",
   };
   
@@ -25,10 +27,9 @@ describe('QuestionOption', () => {
 
   describe('when not answered', () => {
 
-    it('should not be hovered or selected initially', () => {
+    it('should not be hovered initially', () => {
       const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       
-      expect(wrapper.state().isSelected).toEqual(false);
       expect(wrapper.state().isHovered).toEqual(false);
     });
 
@@ -37,7 +38,7 @@ describe('QuestionOption', () => {
       wrapper.simulate("click");
       wrapper.update();
 
-      expect(wrapper.state().isSelected).toEqual(true);
+      expect(anyProps.onToggleSelected).toHaveBeenCalledTimes(1);
     });
 
     it('should be not hovered onClick', () => {
@@ -74,13 +75,11 @@ describe('QuestionOption', () => {
       expect(icon.props().icon[1]).toEqual(uncheckedIcon);
     });
 
-    it('should contain checked box when not selected', () => {
+    it('should contain unchecked box when not selected', () => {
       const wrapper = shallow(<QuestionOption {...anyProps} />);
-      wrapper.setState({isSelected: true});
-      wrapper.update();
 
       const icon = wrapper.find(FontAwesomeIcon);
-      expect(icon.props().icon[1]).toEqual(checkedIcon);
+      expect(icon.props().icon[1]).toEqual(uncheckedIcon);
     });
 
     it('should contain checked box when hovered', () => {
@@ -109,10 +108,10 @@ describe('QuestionOption', () => {
       const props = {
         ...anyProps,
         isAnswered: true,
-        isCorrect: true
+        isCorrect: true,
+        isSelected: true
       };
       const wrapper = shallow(<QuestionOption {...props} />);
-      wrapper.setState({isSelected: true});
 
       expect(wrapper.find(correctMarkerClassName).length).toBe(1);
       expect(wrapper.find(incorrectMarkerClassName).length).toBe(0);
@@ -122,10 +121,10 @@ describe('QuestionOption', () => {
       const props = {
         ...anyProps,
         isAnswered: true,
-        isCorrect: false
+        isCorrect: false,
+        isSelected: true
       };
       const wrapper = shallow(<QuestionOption {...props} />);
-      wrapper.setState({isSelected: true});
 
       expect(wrapper.find(correctMarkerClassName).length).toBe(0);
       expect(wrapper.find(incorrectMarkerClassName).length).toBe(1);
@@ -138,7 +137,6 @@ describe('QuestionOption', () => {
         isCorrect: true
       };
       const wrapper = shallow(<QuestionOption {...props} />);
-      wrapper.setState({isSelected: false});
 
       expect(wrapper.find(correctMarkerClassName).length).toBe(0);
       expect(wrapper.find(incorrectMarkerClassName).length).toBe(1);
@@ -151,7 +149,6 @@ describe('QuestionOption', () => {
         isCorrect: false
       };
       const wrapper = shallow(<QuestionOption {...props} />);
-      wrapper.setState({isSelected: false});
 
       expect(wrapper.find(correctMarkerClassName).length).toBe(1);
       expect(wrapper.find(incorrectMarkerClassName).length).toBe(0);

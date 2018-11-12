@@ -4,12 +4,13 @@ import * as React from 'react';
 export interface QuestionOptionProps {
     text: string;
     isCorrect: boolean;
+    isSelected: boolean;
     isAnswered?: boolean;
+    onToggleSelected: () => void;
 }
 
 export interface QuestionOptionState {
     isHovered: boolean;
-    isSelected: boolean;
 }
 
 export class QuestionOption extends React.Component<QuestionOptionProps, QuestionOptionState> {
@@ -18,14 +19,13 @@ export class QuestionOption extends React.Component<QuestionOptionProps, Questio
         super(props);
         this.state = {
             isHovered: false,
-            isSelected: false,
         };
     }
 
     public render() {
 
-        const { text, isAnswered, isCorrect } = this.props;
-        const { isSelected, isHovered } = this.state;
+        const { text, isAnswered, isSelected, isCorrect } = this.props;
+        const { isHovered } = this.state;
 
         const icon = isSelected || isHovered  ? "check-circle" : "circle";
         const answerMarker = isCorrect 
@@ -51,7 +51,8 @@ export class QuestionOption extends React.Component<QuestionOptionProps, Questio
 
     private onClick = () => {
         if (!this.props.isAnswered) {
-            this.setState({ isSelected: !this.state.isSelected, isHovered: false }); 
+            this.props.onToggleSelected();
+            this.setState({ isHovered: false }); 
         }
     }
 

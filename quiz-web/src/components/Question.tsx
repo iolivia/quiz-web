@@ -7,15 +7,23 @@ export interface QuestionProps {
     options: QuestionOptionProps[];
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface QuestionState {
+    options: QuestionOptionProps[];
 }
 
 export class Question extends React.Component<QuestionProps, QuestionState> {
 
+    public constructor(props: QuestionProps) {
+        super(props);
+        this.state = {
+            options: props.options
+        };
+    }
+
     public render() {
 
-        const { text, options } = this.props;
+        const { text } = this.props;
+        const { options } = this.state;
 
         return (
             <div className="question-container">
@@ -42,10 +50,23 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
         const optionElements = [];
         for (let i = 0; i < options.length; i++) {
             const option = options[i];
-            const optionElement = <QuestionOption key={i} {...option} isAnswered={this.props.isAnswered} />;
+            const optionElement = (
+                <QuestionOption 
+                    key={i} 
+                    {...option} 
+                    isAnswered={this.props.isAnswered} 
+                    onToggleSelected={this.onToggleSelected.bind(this, i)} 
+                />);
             optionElements.push(optionElement);
         }
 
         return optionElements;
+    }
+
+    private onToggleSelected = (questionPropsIndex: number) => {
+        const questionProps = this.state.options[questionPropsIndex];
+        questionProps.isSelected = !questionProps.isSelected;
+
+        this.forceUpdate();
     }
 }

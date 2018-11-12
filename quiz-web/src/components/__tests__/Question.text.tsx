@@ -17,7 +17,10 @@ describe('Question', () => {
     const optionProps = {
       isAnswered: false,
       isCorrect: true,
-      text: "someText"
+      isSelected: false,
+      // tslint:disable-next-line:no-empty
+      onToggleSelected: () => {},
+      text: "someText",
     };
     for(let i = 0; i < count; i++) {
       options.push(optionProps);
