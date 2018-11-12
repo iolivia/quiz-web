@@ -8,7 +8,9 @@ export interface QuizProps {
 }
 
 export interface QuizState {
+    questions: QuestionProps[];
     isAnswered: boolean;
+    score: number;
 }
 
 export class Quiz extends React.Component<QuizProps, QuizState> {
@@ -16,13 +18,16 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
     constructor(props: QuizProps) {
         super(props);
         this.state = {
-            isAnswered: false
+            isAnswered: false,
+            questions: props.questions,
+            score: 0
         };
     }
 
     public render() {
 
-        const { title, questions } = this.props;
+        const { title } = this.props;
+        const { isAnswered, score, questions } = this.state;
 
         return (
             <div className="quiz-container">
@@ -42,6 +47,16 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
                     <div className="quiz-buttons">
                         <Button text="submit" onClick={this.onSubmit} />
                     </div>
+
+                    {/* Score */}
+                    <div className="quiz-score">
+                        {
+                            isAnswered && 
+                            <div>
+                                {score}
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         );
@@ -57,6 +72,14 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
     }
 
     private onSubmit = () => {
-        this.setState({ isAnswered: true });
+        let score = 0;
+        for(const question of this.state.questions) {
+            const correctlyAnsweredOptions = question.options.filter((option) => option.isSelected && option.isCorrect);
+            if (correctlyAnsweredOptions.length === question.options.length) {
+                // get a point
+                score += 1;
+            }
+        }
+        this.setState({ isAnswered: true, score });
     }
 }
