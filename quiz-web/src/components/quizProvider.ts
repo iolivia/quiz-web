@@ -62,6 +62,8 @@ const buildQuestions = (count: number) => {
         const question: QuestionProps = {
             isAnswered: false,
             options: buildOptionProps(),
+            // tslint:disable-next-line:no-empty
+            onOptionChanged: () => { },
             text,
         };
         questions.push(question);

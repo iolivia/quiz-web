@@ -70,6 +70,14 @@ body {
   float: right;
 }
 
+.quiz-results-container {
+  padding: 20px;
+  background-color: #fffcfc;
+  border: 1px solid #f2efef;
+  margin-top: 40px;
+  text-align: center;
+}
+
 .question-container {
   margin-bottom: 15px;
   background-color: #fffcfc;

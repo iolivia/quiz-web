@@ -5,6 +5,7 @@ export interface QuestionProps {
     isAnswered: boolean;
     text: string;
     options: QuestionOptionProps[];
+    onOptionChanged: (questionProps: QuestionOptionProps) => void;
 }
 
 export interface QuestionState {
@@ -64,9 +65,6 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
     }
 
     private onToggleSelected = (questionPropsIndex: number) => {
-        const questionProps = this.state.options[questionPropsIndex];
-        questionProps.isSelected = !questionProps.isSelected;
-
-        this.forceUpdate();
+        this.props.onOptionChanged(this.state.options[questionPropsIndex]);
     }
 }

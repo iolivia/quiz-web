@@ -6,6 +6,7 @@ import { QuestionOption, QuestionOptionProps } from '../QuestionOption';
 
 const anyProps = {
     isAnswered: false,
+    onOptionChanged: jest.fn(),
     options: [],
     text: "someText",
 };
@@ -18,8 +19,7 @@ describe('Question', () => {
       isAnswered: false,
       isCorrect: true,
       isSelected: false,
-      // tslint:disable-next-line:no-empty
-      onToggleSelected: () => {},
+      onToggleSelected: jest.fn(),
       text: "someText",
     };
     for(let i = 0; i < count; i++) {

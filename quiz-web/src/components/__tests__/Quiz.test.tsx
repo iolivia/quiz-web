@@ -18,6 +18,7 @@ describe('Quiz', () => {
             isAnswered: false,
             options: [],
             text: "someText",
+            onOptionChanged: jest.fn(),
         };
         for (let i = 0; i < count; i++) {
             questions.push(questionProps);
