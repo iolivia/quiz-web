@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Quiz, QuizProps } from './Quiz';
-import { getQuiz } from './quizProvider';
+
+import { QuizData } from '../data/QuizData';
+import { getQuiz } from '../data/quizProvider';
+import { Quiz } from './Quiz';
 
 // tslint:disable-next-line:no-empty-interface
 export interface QuizContainerProps {
 }
 
 export interface QuizContainerState {
-    quizProps: QuizProps | null;
+    quizProps: QuizData | null;
 }
 
 export class QuizContainer extends React.Component<QuizContainerProps, QuizContainerState> {
@@ -21,9 +23,7 @@ export class QuizContainer extends React.Component<QuizContainerProps, QuizConta
     }
 
     public componentDidMount() {
-        getQuiz("fakeId").then((quizProps) => {
-            this.setState({quizProps});
-        });
+        getQuiz("fakeId").then(this.onQuizData);
     }
 
     public render() {
@@ -33,11 +33,15 @@ export class QuizContainer extends React.Component<QuizContainerProps, QuizConta
         return (
             <div>
                 {
-                    isLoading 
-                        ? (quizProps && <Quiz {...quizProps} /> ) 
+                    !isLoading 
+                        ? (quizProps && <Quiz data={quizProps} /> ) 
                         : (<div className="loading-container">{this.loadingText}</div>)
                 }
             </div>
         );
+    }
+
+    public onQuizData = (quizProps: QuizData) => {
+        this.setState({ quizProps });
     }
 }

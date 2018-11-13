@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { QuizData } from '../data/QuizData';
 import { Button } from './Button';
 import { Question, QuestionProps } from './Question';
 import { QuestionOptionProps } from './QuestionOption';
 
 export interface QuizProps {
-    title: string;
-    questions: QuestionProps[];
+    data: QuizData;
 }
 
 export interface QuizState {
@@ -20,14 +20,29 @@ export class Quiz extends React.Component<QuizProps, QuizState> {
         super(props);
         this.state = {
             isAnswered: false,
-            questions: props.questions,
+            questions: props.data.questions.map((questionData) => { return {
+                ...questionData,
+                isAnswered: false,
+                // tslint:disable-next-line:no-empty
+                onOptionChanged: () => {},
+                options: questionData.options.map((optionData) => {
+                    return {
+                        ...optionData,
+                        isSelected: false,
+                        isAnswered: false,
+                        // tslint:disable-next-line:no-empty
+                        onToggleSelected: () => {}
+                    };
+                })
+            };}),
             score: 0
         };
     }
 
     public render() {
 
-        const { title } = this.props;
+        const { data } = this.props;
+        const { title } = data;
         const { isAnswered, score, questions } = this.state;
 
         return (

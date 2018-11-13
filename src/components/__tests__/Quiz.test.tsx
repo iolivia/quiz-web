@@ -2,23 +2,27 @@ import { shallow } from 'enzyme';
 
 import React from 'react';
 
-import { Question, QuestionProps } from '../Question';
+import { QuestionData } from '../../data/QuizData';
+import { Question } from '../Question';
 import { Quiz } from '../Quiz';
 
-const anyProps = {
-    questions: [],
+const data = {
+    id: "quiz-id",
     title: "Quiz title",
-}
+    questions: [],
+};
+
+const anyProps = {
+    data
+};
 
 describe('Quiz', () => {
 
-    const createQuestions = (count: number): QuestionProps[] => {
+    const createQuestions = (count: number): QuestionData[] => {
         const questions = [];
         const questionProps = {
-            isAnswered: false,
             options: [],
             text: "someText",
-            onOptionChanged: jest.fn(),
         };
         for (let i = 0; i < count; i++) {
             questions.push(questionProps);
@@ -37,14 +41,26 @@ describe('Quiz', () => {
     [2, 10, 50].forEach(numberOfQuestions => {
         it(`should render the same number of questions as given - ${numberOfQuestions}`, () => {
             const questions = createQuestions(numberOfQuestions);
-            const wrapper = shallow(<Quiz {...anyProps} questions={questions} />);
+            const props = {
+                data: {
+                    ...data,
+                    questions,
+                }
+            };
+            const wrapper = shallow(<Quiz {...props} />);
             expect(wrapper.find(Question).length).toBe(numberOfQuestions);
         });
     });
 
     [true, false].forEach(isAnswered => {
         it(`should send ${isAnswered} to all questions when isAnswered is ${isAnswered}`, () => {
-          const wrapper = shallow(<Quiz {...anyProps} questions={mockQuestions} />);
+            const props = {
+                data: {
+                    ...data,
+                    mockQuestions,
+                }
+            };
+            const wrapper = shallow(<Quiz {...props} />);
       
           wrapper.setState({isAnswered});
           

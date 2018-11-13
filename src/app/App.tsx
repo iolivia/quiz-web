@@ -1,9 +1,8 @@
 import * as React from 'react';
 import './../styles/App.css';
 
+import { QuizContainer } from '../components/QuizContainer'
 import { initializeFontAwesomeLibrary } from '../styles/fontAwesome';
-
-import { QuizContainer } from '../components/QuizContainer';
 
 // tslint:disable-next-line:no-empty-interface
 export interface AppProps {
