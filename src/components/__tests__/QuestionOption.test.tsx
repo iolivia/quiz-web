@@ -8,14 +8,14 @@ describe('QuestionOption', () => {
 
   const anyProps = {
     isCorrect: true,
+    text: "someText",
     isSelected: false,
     onToggleSelected: jest.fn(),
-    text: "someText",
   };
-  
+
   const uncheckedIcon = "circle";
   const checkedIcon = "check-circle";
-  
+
   const correctMarkerClassName = ".question-option-answer-correct";
   const incorrectMarkerClassName = ".question-option-answer-incorrect";
 
@@ -29,7 +29,7 @@ describe('QuestionOption', () => {
 
     it('should not be hovered initially', () => {
       const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
-      
+
       expect(wrapper.state().isHovered).toEqual(false);
     });
 
@@ -54,7 +54,7 @@ describe('QuestionOption', () => {
       const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
       wrapper.find(".question-option-container").simulate("mouseEnter");
       wrapper.update();
-      
+
       expect(wrapper.state().isHovered).toEqual(true);
     });
 
@@ -68,7 +68,7 @@ describe('QuestionOption', () => {
 
     it('should contain unchecked box when not selected', () => {
       const wrapper = shallow(<QuestionOption {...anyProps} />);
-      wrapper.setState({isSelected: false});
+      wrapper.setState({ isSelected: false });
       wrapper.update();
 
       const icon = wrapper.find(FontAwesomeIcon);
@@ -84,7 +84,7 @@ describe('QuestionOption', () => {
 
     it('should contain checked box when hovered', () => {
       const wrapper = shallow(<QuestionOption {...anyProps} />);
-      wrapper.setState({isHovered: true});
+      wrapper.setState({ isHovered: true });
       wrapper.update();
 
       const icon = wrapper.find(FontAwesomeIcon);
@@ -93,7 +93,7 @@ describe('QuestionOption', () => {
 
     it('should contain unchecked box when not hovered', () => {
       const wrapper = shallow(<QuestionOption {...anyProps} />);
-      wrapper.setState({isHovered: false});
+      wrapper.setState({ isHovered: false });
       wrapper.update();
 
       const icon = wrapper.find(FontAwesomeIcon);
@@ -104,55 +104,46 @@ describe('QuestionOption', () => {
 
   describe('when answered', () => {
 
-    it('should contain correct marker when selected and correct', () => {
-      const props = {
-        ...anyProps,
-        isAnswered: true,
+    const tests = [
+      {
         isCorrect: true,
-        isSelected: true
-      };
-      const wrapper = shallow(<QuestionOption {...props} />);
-
-      expect(wrapper.find(correctMarkerClassName).length).toBe(1);
-      expect(wrapper.find(incorrectMarkerClassName).length).toBe(0);
-    });
-
-    it('should contain incorrect marker when selected and not correct', () => {
-      const props = {
-        ...anyProps,
-        isAnswered: true,
+        isSelected: true,
+        expectedCorrect: true,
+      },
+      {
         isCorrect: false,
-        isSelected: true
-      };
-      const wrapper = shallow(<QuestionOption {...props} />);
+        isSelected: true,
+        expectedCorrect: false,
+      },
+      {
+        isCorrect: true,
+        isSelected: false,
+        expectedCorrect: false,
+      },
+      {
+        isCorrect: false,
+        isSelected: false,
+        expectedCorrect: true,
+      },
+    ];
 
-      expect(wrapper.find(correctMarkerClassName).length).toBe(0);
-      expect(wrapper.find(incorrectMarkerClassName).length).toBe(1);
-    });
+    for(const test of tests) {
 
-    it('should contain incorrect marker when not selected and correct', () => {
-      const props = {
-        ...anyProps,
-        isAnswered: true,
-        isCorrect: true
-      };
-      const wrapper = shallow(<QuestionOption {...props} />);
+      it(`should ${!test.expectedCorrect ? "not" : ""} contain correct marker when ${!test.isSelected ? "not" : ""} selected and ${!test.isCorrect ? "not" : ""} correct`, () => {
+        const props = {
+          ...anyProps,
+          isAnswered: true,
+          isCorrect: test.isCorrect,
+          isSelected: test.isSelected
+        };
+        const wrapper = shallow(<QuestionOption {...props} />);
 
-      expect(wrapper.find(correctMarkerClassName).length).toBe(0);
-      expect(wrapper.find(incorrectMarkerClassName).length).toBe(1);
-    });
-
-    it('should contain correct marker when not selected and not correct', () => {
-      const props = {
-        ...anyProps,
-        isAnswered: true,
-        isCorrect: false
-      };
-      const wrapper = shallow(<QuestionOption {...props} />);
-
-      expect(wrapper.find(correctMarkerClassName).length).toBe(1);
-      expect(wrapper.find(incorrectMarkerClassName).length).toBe(0);
-    });
+        const expectedCorrectMarkerCount = test.expectedCorrect ? 1 : 0;
+        const expectedIncorrectMarkerCount = test.expectedCorrect ? 0 : 1;
+        expect(wrapper.find(correctMarkerClassName).length).toBe(expectedCorrectMarkerCount);
+        expect(wrapper.find(incorrectMarkerClassName).length).toBe(expectedIncorrectMarkerCount);
+      });
+    }
 
   });
 });
