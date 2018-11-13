@@ -1,0 +1,140 @@
+[
+    {
+        "id": "test-quiz",
+        "title": "What is the best quiz",
+        "questions": [
+            {
+                "text": "What is the best fruit?",
+                "options": [
+                    {
+                        "isCorrect": true,
+                        "text": "Apples"
+                    },
+                    {
+                        "isCorrect": true,
+                        "text": "Oranges"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Pears"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Other"
+                    }
+                ]
+            },
+            {
+                "text": "What is the best car brand?",
+                "options": [
+                    {
+                        "isCorrect": false,
+                        "text": "BMW"
+                    },
+                    {
+                        "isCorrect": true,
+                        "text": "Dacia"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Tesla"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Other"
+                    }
+                ]
+            },
+            {
+                "text": "What is the best drink?",
+                "options": [
+                    {
+                        "isCorrect": false,
+                        "text": "Diet Coke"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Fanta"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Sprite"
+                    },
+                    {
+                        "isCorrect": true,
+                        "text": "Coke Zero"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "test-quiz-2",
+        "title": "What is the best quiz 2",
+        "questions": [
+            {
+                "text": "What is the best fruit?",
+                "options": [
+                    {
+                        "isCorrect": true,
+                        "text": "Apples"
+                    },
+                    {
+                        "isCorrect": true,
+                        "text": "Oranges"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Pears"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Other"
+                    }
+                ]
+            },
+            {
+                "text": "What is the best car brand?",
+                "options": [
+                    {
+                        "isCorrect": false,
+                        "text": "BMW"
+                    },
+                    {
+                        "isCorrect": true,
+                        "text": "Dacia"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Tesla"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Other"
+                    }
+                ]
+            },
+            {
+                "text": "What is the best drink?",
+                "options": [
+                    {
+                        "isCorrect": false,
+                        "text": "Diet Coke"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Fanta"
+                    },
+                    {
+                        "isCorrect": false,
+                        "text": "Sprite"
+                    },
+                    {
+                        "isCorrect": true,
+                        "text": "Coke Zero"
+                    }
+                ]
+            }
+        ]
+    }
+]
