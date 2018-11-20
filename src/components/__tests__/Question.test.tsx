@@ -1,19 +1,20 @@
 import { shallow } from 'enzyme';
 
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Question } from '../Question';
 import { QuestionOption, QuestionOptionProps } from '../QuestionOption';
 
 const anyProps = {
-    isAnswered: false,
-    onOptionChanged: jest.fn(),
-    options: [],
-    text: "someText",
+  isAnswered: false,
+  onOptionChanged: jest.fn(),
+  options: [],
+  text: "someText",
 };
 
 describe('Question', () => {
 
-  const createOptions = (count: number) : QuestionOptionProps[] => {
+  const createOptions = (count: number): QuestionOptionProps[] => {
     const options = [];
     const optionProps = {
       isAnswered: false,
@@ -22,7 +23,7 @@ describe('Question', () => {
       onToggleSelected: jest.fn(),
       text: "someText",
     };
-    for(let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
       options.push(optionProps);
     }
 
@@ -44,17 +45,24 @@ describe('Question', () => {
     });
   });
 
-  it('should render the text given', () => {
+  it('should contain ReactMarkdown element', () => {
     const questionText = "Question text";
     const wrapper = shallow(<Question {...anyProps} options={mockOptions} text={questionText} />);
 
-    expect(wrapper.find(".question-text").text()).toEqual(questionText);
+    expect(wrapper.find(ReactMarkdown).length).toBe(1);
+  });
+
+  it('should contain the text given', () => {
+    const questionText = "Question text";
+    const wrapper = shallow(<Question {...anyProps} options={mockOptions} text={questionText} />);
+
+    expect(wrapper.find(ReactMarkdown).props().source).toContain(questionText);
   });
 
   [true, false].forEach(isAnswered => {
     it(`should send ${isAnswered} to all options when isAnswered is ${isAnswered}`, () => {
       const wrapper = shallow(<Question {...anyProps} options={mockOptions} isAnswered={isAnswered} />);
-  
+
       const options = wrapper.find(QuestionOption);
       const notAnsweredOptions = wrapper.find(QuestionOption).filterWhere(o => o.props().isAnswered === isAnswered);
       expect(notAnsweredOptions.length).toEqual(options.length);

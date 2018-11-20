@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
+import ReactMarkdown from 'react-markdown';
+import { CodeBlock } from './CodeRenderer';
 
 export interface QuestionOptionProps {
     text: string;
@@ -42,7 +44,7 @@ export class QuestionOption extends React.Component<QuestionOptionProps, Questio
                 >
                 <FontAwesomeIcon icon={["far", icon]} />
                 <div className="question-option-text">
-                    {text}
+                    <ReactMarkdown source={text} renderers={{code: CodeBlock}} />
                 </div>
                 {isAnswered && <div className={answerMarkerClass} />}
             </div>

@@ -8,6 +8,6 @@ export const getQuiz = (quizId: string): Promise<QuizData | null> => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(localData[0]);
-        }, 2000);
+        }, 10);
     });
 }

@@ -85,7 +85,6 @@ body {
 }
 
 .question-text {
-  text-align: center;
   padding: 20px;
 }
 
@@ -107,7 +106,7 @@ body {
 }
 
 .question-option-text {
-  padding: 15px;
+  padding: 5px;
   margin-left: 10px;
   display: inline-block;
 }

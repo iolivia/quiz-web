@@ -1,4 +1,6 @@
 import * as React from 'react';
+import ReactMarkdown from 'react-markdown';
+import { CodeBlock } from './CodeRenderer';
 import { QuestionOption, QuestionOptionProps } from './QuestionOption';
 
 export interface QuestionProps {
@@ -34,7 +36,7 @@ export class Question extends React.Component<QuestionProps, QuestionState> {
 
                     {/* Question text */}
                     <div className="question-text">
-                        {text}
+                        <ReactMarkdown source={text} renderers={{code: CodeBlock}} />
                     </div>
 
                     {/* Options */}
