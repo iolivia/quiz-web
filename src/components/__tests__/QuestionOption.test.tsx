@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { QuestionOption } from '../QuestionOption';
@@ -23,6 +24,19 @@ describe('QuestionOption', () => {
     const wrapper = shallow(<QuestionOption {...anyProps} />);
 
     expect(wrapper).not.toBe(null);
+  });
+
+  it('should contain ReactMarkdown element', () => {
+    const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} />);
+
+    expect(wrapper.find(ReactMarkdown).length).toBe(1);
+  });
+
+  it('should contain option text', () => {
+    const questionOptionText = "Question text";
+    const wrapper = shallow<QuestionOption>(<QuestionOption {...anyProps} text={questionOptionText} />);
+
+    expect(wrapper.find(ReactMarkdown).props().source).toContain(questionOptionText);
   });
 
   describe('when not answered', () => {
@@ -127,7 +141,7 @@ describe('QuestionOption', () => {
       },
     ];
 
-    for(const test of tests) {
+    for (const test of tests) {
 
       it(`should ${!test.expectedCorrect ? "not" : ""} contain correct marker when ${!test.isSelected ? "not" : ""} selected and ${!test.isCorrect ? "not" : ""} correct`, () => {
         const props = {
