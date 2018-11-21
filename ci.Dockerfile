@@ -4,7 +4,7 @@ WORKDIR /home/app
 
 # Install npm dependencies
 COPY package.json package-lock.json ./
-RUN npm install --only=production
+RUN npm install
 
 # Copy application source
 COPY . .
@@ -12,5 +12,5 @@ COPY . .
 # Compile source
 RUN npm run build
 
-# Run application
-CMD npm run start
+# Run tests
+RUN npm run test-coverage
