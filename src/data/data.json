@@ -1,7 +1,7 @@
 [
     {
         "id": "test-quiz",
-        "title": "What is the best quiz",
+        "title": "What is the best quiz?",
         "questions": [
             {
                 "text": "What is the best fruit? \n ```js\n function() {\n     console.log();\n }\n ```",
